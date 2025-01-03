@@ -1,0 +1,574 @@
+@charset "UTF-8";
+
+.lista-clientes-container {
+    max-height: 300px;
+    overflow-y: auto;
+    border: 1px solid #ccc;
+    padding: 10px;
+    padding-right: 10px;
+    margin-top: 0;
+    background-color: #f9f9f9;
+    border-radius: 5px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.lista-clientes-container ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.lista-clientes-container li {
+    display: block; /* Certifica que cada li ocupe a linha inteira */
+    justify-content: space-between;
+    margin-bottom: 10px;
+    width: 100%; /* Garante que o li ocupe toda a largura disponível */
+}
+
+.lista-clientes-container li div {
+    flex-grow: 1; /* Faz com que cada div ocupe igualmente o espaço disponível */
+    text-align: left;
+    padding: 0 5px; /* Adiciona um pequeno espaçamento entre as colunas */
+}
+
+.cliente-info {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+}
+
+.cliente-info span:nth-child(1) { /* Nome */
+    flex-basis: 45%; /* Nome ocupa 40% da largura */
+}
+.cliente-info span:nth-child(2) { /* CPF */
+    font-size: 15px;
+    flex-basis: 13%; /* CPF ocupa 30% da largura */
+}
+.cliente-info span:nth-child(3) { /* Responsável */
+    flex-basis: 42%; /* Responsável ocupa 30% da largura */
+}
+
+
+.lista-clientes-container button {
+    background-color: #323538;
+    color: white;
+    border: none;
+    padding: 10px; /* Aumenta o padding para dar um melhor visual */
+    border-radius: 3px;
+    cursor: pointer;
+    width: 100%; /* Garante que o botão ocupe toda a largura do item */
+    text-align: center; /* Alinha o texto à esquerda */
+    box-sizing: border-box; /* Garante que padding não afete a largura total */
+}
+
+.lista-clientes-container button:hover {
+    background-color: #888a8b;
+}
+
+
+
+
+
+
+/* Estilo geral do contêiner das notas */
+.notas-container {
+    position: relative;
+    top: -100px;
+    margin-top: 0; /* Margem superior */
+    border: 1px solid #ccc; /* Borda */
+    border-radius: 5px; /* Bordas arredondadas */
+    padding: 0px; /* Espaçamento interno */
+    background-color: #f9f9f9; /* Cor de fundo */
+    max-height: 210px; /* Ajuste a altura para que fique abaixo da caixa */
+    overflow-y: auto; /* Habilita rolagem vertical */
+    box-sizing: border-box; /* Garante que padding e borda não aumentem a altura */
+}
+
+
+
+/* Barra de rolagem personalizada */
+.notas-container::-webkit-scrollbar {
+    width: 10px;
+}
+
+.notas-container::-webkit-scrollbar-track {
+    background: #f1f1f1;
+}
+
+.notas-container::-webkit-scrollbar-thumb {
+    background: #888;
+    border-radius: 5px;
+}
+
+.notas-container::-webkit-scrollbar-thumb:hover {
+    background: #555;
+}
+
+
+/* Estilo da tabela */
+.contas_a_receber {
+    width: 100%; /* Tabela ocupa toda a largura disponível */
+    border-collapse: collapse; /* Remove espaçamento entre células */
+    margin-top: 10px;
+}
+
+/* Fixar o cabeçalho da tabela */
+.contas_a_receber thead th {
+    position: sticky; /* Fixa o cabeçalho */
+    top: 0; /* Fixa no topo do contêiner */
+    margin-top: 0px;
+    background-color: #4e5255; /* Cor de fundo para destacar o cabeçalho */
+    color: #fff; /* Cor do texto */
+    text-align: left; /* Alinha o texto à esquerda */
+    padding: 12px; /* Espaçamento interno */
+    border-bottom: 2px solid #ddd; /* Borda inferior */
+    z-index: 2; /* Garante que o cabeçalho fique acima das linhas da tabela */
+}
+
+/* Estilo para o corpo da tabela */
+.contas_a_receber tbody td {
+    padding: 8px; /* Espaçamento interno */
+    border-bottom: 1px solid #ddd; /* Borda inferior */
+}
+
+/* Cor de fundo alternada para as linhas */
+.contas_a_receber tbody tr:nth-child(odd) {
+    background-color: #f2f2f2; /* Cor de fundo clara para linhas ímpares */
+}
+
+.contas_a_receber tbody tr:hover {
+    background-color: #e6f7ff; /* Destaque ao passar o mouse */
+}
+
+/* Ajuste no texto para evitar overflow */
+.contas_a_receber td, .contas_a_receber th {
+    word-wrap: break-word; /* Quebra o texto longo */
+}
+
+/* Barra de rolagem personalizada (opcional) */
+.notas-container::-webkit-scrollbar {
+    width: 10px; /* Largura da barra de rolagem */
+}
+
+.notas-container::-webkit-scrollbar-track {
+    background: #f1f1f1; /* Cor do fundo da barra de rolagem */
+}
+
+.notas-container::-webkit-scrollbar-thumb {
+    background: #888; /* Cor da barra de rolagem */
+    border-radius: 5px;
+}
+
+.notas-container::-webkit-scrollbar-thumb:hover {
+    background: #555; /* Cor da barra ao passar o mouse */
+}
+
+.tabela-notas {
+    width: 100%; /* Largura total */
+    border-collapse: collapse; /* Junta as bordas */
+    margin: 0; /* Remove margens */
+}
+
+.tabela-notas th, .tabela-notas td {
+    padding: 8px; /* Espaçamento interno */
+    border: 1px solid #ddd; /* Borda fina */
+    text-align: center; /* Alinha o texto ao centro */
+    word-wrap: break-word; /* Quebra o texto longo */
+}
+
+.tabela-notas tr:nth-child(even) {
+    background-color: #f9f9f9; /* Cor de fundo alternada */
+}
+
+.tabela-notas tr:hover {
+    background-color: #ddd; /* Destaque ao passar o mouse */
+}
+
+
+
+body {
+    font-family: Arial, sans-serif;
+    background-color: #333333;
+}
+
+.titulo {
+    font-size: 3,6rem;
+    text-align: center;
+    margin-top: 10px; /* Reduz a margem superior */
+    margin-bottom: 20px;
+    font-weight: bold;
+    color: green;
+    text-shadow: 2px 2px black;
+}
+
+.detalhes-cliente {
+    display: flex;
+    justify-content: flex-start; /* Alinha os itens à esquerda */
+    gap: 3%; /* Espaçamento entre CPF e nome */
+    margin-top: 10px; 
+    margin-left: 20px; /* Adiciona margem à esquerda para mais espaçamento */
+}
+
+/* Detalhes do Cliente */
+.detalhes {
+    width: 46%; /* Ajuste a largura para não ocupar 100% */
+}
+
+/* Caixa de Atendimentos */
+.caixa-atendimentos {
+    width: 46%; /* Ajuste a largura para não ocupar 100% */
+    height: 114px;
+    position: relative;
+    top: -100px; /* Move 20px para cima */
+    border: 1px solid #ccc; /* Borda da caixinha */
+    padding: 10px; /* Espaçamento interno */
+    padding-top: 1px;
+    background-color: #f9f9f9; /* Cor de fundo */
+    border-radius: 5px; /* Bordas arredondadas */
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* Sombra suave */
+    overflow-y: auto; /* Adiciona rolagem vertical quando o conteúdo ultrapassar a altura */
+}
+
+/* Estilo para os itens de atendimento */
+.caixa-atendimentos ul {
+    list-style: none; /* Remove marcadores */
+    padding: 0;
+    margin: 0;
+}
+
+.caixa-atendimentos li {
+    padding: 5px 0; /* Espaçamento entre os itens */
+    border-bottom: 1px solid #ddd; /* Borda inferior para cada item */
+    position: relative;
+    top: -38px; /* Move 20px para cima */
+}
+
+/* Estilo do título da caixinha */
+.caixa-atendimentos h3 {
+    color: #000000; /* Cor do título */
+    font-size: 1.2em; /* Tamanho da fonte */
+    margin-bottom: 1px; /* Espaçamento abaixo do título */
+}
+
+
+.resultado-container {
+    width: 100%;
+    max-height: 100px; /* Limita a altura para 300px */
+    overflow-y: auto; /* Adiciona rolagem vertical */
+    border: 1px solid #ccc;
+    padding: 10px;
+    margin-top: 10px;
+    background-color: #f9f9f9;
+}
+
+.resultado-item {
+    margin: 5px 0;
+}
+
+.container {
+    display: flex;
+    justify-content: center; /* Centraliza horizontalmente */
+    align-items: center; /* Centraliza verticalmente */
+    height: 100vh; /* Faz o container ocupar 100% da altura da tela */
+}
+
+.box {
+    background-color: white;
+    padding: 40px; /* Espaçamento interno para o conteúdo */
+    border-radius: 10px; /* Bordas arredondadas para o retângulo */
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.1); /* Adiciona uma sombra */
+    text-align: center;
+    width: 1150px; /* Define uma largura fixa */
+    height: 470px;
+    overflow: hidden; /* Evita que conteúdo saia */
+}
+
+h1 {
+    position: relative;
+    top: -45px; /* Move 20px para cima */
+    margin-top: 0; /* Margem superior */
+    color: #117011; /* Cor do texto */
+    text-align: center; /* Alinhamento central do texto */
+    font-weight: 900; /* Espessura mais forte */
+    font-size: 50px; /* Tamanho da fonte */
+    -webkit-text-stroke: 3px black; /* Adiciona borda preta com 1px de espessura */
+    text-shadow: none; /* Remove sombras para manter o foco na borda */
+}
+
+label {
+    margin-top: 0; /* Margem superior */
+    position: relative;
+    top: -55px; /* Move 20px para cima */
+}
+
+input {
+    margin-top: 0; /* Margem superior */
+    position: relative;
+    top: -55px; /* Move 20px para cima */
+}
+
+button {
+    margin-top: 0; /* Margem superior */
+    position: relative;
+    top: -55px; /* Move 20px para cima */
+}
+
+h2 {
+    position: relative;
+    top: -79px;
+    text-align: left ; /* Alinha o título ao meio */
+    margin-left: 150px; /* Adiciona uma margem à esquerda para o título */
+}
+
+h3 {
+    position: relative;
+    top: -33px; /* Move 20px para cima */
+    margin-top: 0; /* Margem superior */
+}
+
+h4 {
+    position: relative;
+    top: -80px; /* Move 20px para cima */
+    margin-top: 0; /* Margem superior */
+    font-size: 20px; /* Tamanho da fonte */
+}
+
+.total-a-receber {
+    position: absolute;
+    right: 100px; /* Alinha à direita */
+    bottom: 10px; /* Fica logo abaixo da caixa de notas */
+    font-weight: bold;
+    color: #333;
+    padding: 10px;
+}
+
+.linha {
+    display: flex; /* Torna o conteúdo flexível */
+    justify-content: space-between; /* Espaço entre os itens */
+    align-items: center; /* Alinha os itens verticalmente */
+    gap: 20px; /* Espaço entre os elementos */
+}
+
+.linha p {
+    margin: 0; /* Remove margens padrão dos parágrafos */
+}
+
+.tabela-detalhes {
+    width: 100%; /* Faz a tabela ocupar toda a largura disponível */
+    border-collapse: collapse; /* Remove espaços entre as bordas */
+    margin-left: 20px; /* Margem para alinhar a tabela */
+    text-align: left; /* Alinha o texto à esquerda */
+    position: relative;
+    top: -100px; /* Move 20px para cima */
+    margin-top: 0; /* Margem superior */
+}
+
+.tabela-detalhes th, .tabela-detalhes td {
+    border: 1px solid #ddd; /* Adiciona bordas */
+    padding: 2px; /* Espaçamento interno */
+}
+
+.tabela-detalhes th {
+    background-color: #f2f2f2; /* Fundo diferente para o cabeçalho */
+    font-weight: bold; /* Deixa o cabeçalho em negrito */
+    text-align: left; /* Alinha o texto do cabeçalho à esquerda */
+}
+
+.tabela-detalhes tr:nth-child(even) {
+    background-color: #f9f9f9; /* Alterna cores para as linhas pares */
+}
+
+.tabela-detalhes tr:hover {
+    background-color: #f1f1f1; /* Destaque na linha ao passar o mouse */
+}
+
+.tabela-detalhes td {
+    font-size: 14px;
+}
+
+.cabeçalho {
+    position: relative;
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 1px;
+}
+
+.cabeçalho th:nth-child(1), /* Coluna Nome */
+.cabeçalho td:nth-child(1) {
+    width: 200px; /* Ajuste conforme necessário */
+}
+
+.cabeçalho th:nth-child(2), /* Coluna CPF */
+.cabeçalho td:nth-child(2) {
+    width: 40px; /* Ajuste conforme necessário */
+}
+
+.cabeçalho th:nth-child(3), /* Coluna Responsável */
+.cabeçalho td:nth-child(3) {
+    width: 200px; /* Ajuste conforme necessário */
+}
+
+.cabeçalho thead th {
+    position: sticky;
+    top: 0;
+    background-color: #f2f2f2;
+    z-index: 2; /* Garante que o cabeçalho esteja acima */
+    border: 1px solid #ccc;
+    padding: 10px;
+}
+
+.cabeçalho tbody td {
+    border: 1px solid #ccc;
+    padding: 10px;
+}
+
+
+
+
+
+
+
+
+
+
+
+/* Botão "+" no canto inferior direito */
+.add-button {
+    position: relative;
+    top: -20px;
+    bottom: 10px;
+    right: -480px; /* Ajuste para o canto inferior direito da caixinha */
+    width: 30px; /* Tamanho do botão */
+    height: 30px;
+    border-radius: 50%; /* Botão circular */
+    background-color: #28a745; /* Cor verde */
+    color: #fff; /* Cor do texto */
+    font-size: 18px; /* Tamanho da fonte */
+    border: none; /* Sem borda */
+    cursor: pointer; /* Cursor de clique */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2); /* Sombra */
+}
+
+.add-button:hover {
+    background-color: #218838; /* Cor mais escura ao passar o mouse */
+}
+
+
+/* Formulário de adicionar observação */
+#observationForm {
+    position: fixed; /* Mantém a posição fora da caixa de atendimentos */
+    bottom: 270px; /* Ajuste de posição vertical */
+    right: 60px;
+    background-color: white;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    padding: 20px;
+    width: 400px; 
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+    z-index: 1000; /* Garante que fique acima de outros elementos */
+}
+
+.hidden {
+    display: none;
+}
+
+#observationForm select {
+    margin-bottom: 10px;
+    width: 100%;
+    padding: 5px;
+    border-radius: 4px;
+    border: 1px solid #ccc;
+}
+
+
+/* Inputs do formulário */
+#observationForm textarea {
+    width: 100%;
+    height: 100px; /* Ajuste a altura conforme necessário */
+    margin-bottom: 10px;
+}
+
+#observationForm input {
+    position: relative;
+    top: 10px;
+    width: 100%;
+    height: 20px; /* Ajuste a altura conforme necessário */
+    margin-bottom: 10px;
+}
+
+#observationForm button {
+    position: relative;
+    top: 10px;
+    margin-top: 10px;
+    margin: 3px;
+    width: 90px;
+    height: 30px;
+    padding: 10px 15px;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+#observationForm button:hover {
+    background-color: #0056b3;
+}
+
+#observationForm label {
+    position:relative;
+    top: 1px;
+    font-weight: bold;
+    color: #333;
+}
+
+#tabela-atendimentos {
+    position: relative;
+    top: -30px;
+    width: 100%;  /* A tabela ocupará toda a largura da caixa */
+    table-layout: fixed;  /* Faz com que a tabela tenha uma largura fixa para as colunas */
+    border-collapse: collapse;
+    margin-top: 20px;
+}
+
+#tabela-atendimentos, #tabela-atendimentos th, #tabela-atendimentos td {
+    border: 1px solid #ddd;
+}
+
+#tabela-atendimentos th, #tabela-atendimentos td {
+    font-size: 12px;
+    padding: 4px;  /* Ajusta o espaçamento interno das células (em cima, embaixo, direita e esquerda) */
+    height: 20px;  /* Ajusta a altura das linhas */
+    text-align: left;
+    word-wrap: break-word; /* Quebra o texto caso seja muito longo */
+}
+
+/* Ajustando a largura de cada coluna */
+#tabela-atendimentos th:nth-child(1),
+#tabela-atendimentos td:nth-child(1) {
+    width: 16%;  /* Ajusta a largura da primeira coluna */
+}
+
+#tabela-atendimentos th:nth-child(2),
+#tabela-atendimentos td:nth-child(2) {
+    width: 30%;  /* Ajusta a largura da segunda coluna */
+}
+
+#tabela-atendimentos th:nth-child(3),
+#tabela-atendimentos td:nth-child(3) {
+    width: 14%;  /* Ajusta a largura da terceira coluna */
+}
+
+#tabela-atendimentos th:nth-child(4),
+#tabela-atendimentos td:nth-child(4) {
+    width: 40%;  /* Ajusta a largura da quarta coluna */
+}
+
+#tabela-atendimentos th {
+    background-color: #f2f2f2;
+}
+
+

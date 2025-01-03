@@ -1,0 +1,287 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Consulta de Cliente</title>
+    <link href="{{ url_for('static', filename='css/home2.css') }}" rel="stylesheet" />
+</head>
+<body>
+    <div class="container">
+        <div class="box">
+            <h1 class="titulo">Consultar Cliente</h1>
+            <form method="POST" action="/consulta">
+                <label for="nome">NOME:</label>
+                <input type="text" id="nome" name="nome" required>
+                <button type="submit">Pesquisar</button>
+            </form>
+
+            <div>    
+                {% if clientes and not cliente_detalhes %}
+                    <thead>
+                        <table class="cabeçalho">
+                            <thead>
+                                <tr>
+                                    <th>Nome</th>
+                                    <th>CPF</th>
+                                    <th>Responsável</th>
+                                </tr>
+                            </thead>
+                        </table>
+                    </thead>
+                    <div class="lista-clientes-container">
+                        <h2>Clientes Encontrados</h2>
+                        <ul>
+                            {% for cliente in clientes %}
+                                <li>
+                                    <form method="POST" action="/consulta">
+                                        <input type="hidden" name="cpf_selecionado" value="{{ cliente[0] }}">
+                                        <button type="submit">
+                                            <div class="cliente-info">
+                                                <span>{{ cliente[1] }}</span> <!-- Nome -->
+                                                <span>{{ cliente[0] }}</span> <!-- CPF -->
+                                                <span>{{ cliente[2] }}</span> <!-- Responsável -->
+                                            </div>
+                                        </button>
+                                    </form>
+                                </li>
+                            {% endfor %}
+                        </ul>
+                    </div>
+                    
+                {% endif %}
+                
+                {% if cliente_detalhes %} 
+                    <!-- Detalhes do Cliente Selecionado -->
+                    <div>
+                        <h2>Detalhes do Cliente</h2>
+                        <div class="detalhes-cliente">
+                            <div class="detalhes">
+                                <table class="tabela-detalhes">
+                                    <thead>
+                                        <tr>
+                                            <th>NOME</th>
+                                            <th>CPF</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td>{{ cliente_detalhes['nome'] }}</td>
+                                            <td>{{ cliente_detalhes['cpf'] }}</td>
+                                        </tr>
+
+                                        <!-- Clientes relacionados -->
+                                        {% for cliente_relacionado in clientes_relacionados_detalhes %}
+                                            {% if cliente_relacionado['nome'] != cliente_detalhes['nome'] %}
+                                                <tr>
+                                                    <td>{{ cliente_relacionado['nome'] }}</td>
+                                                    <td>{{ cliente_relacionado['cpf'] }}</td>
+                                                </tr>
+                                            {% endif %}
+                                        {% endfor %}
+                                    </tbody>
+                                </table>
+                            </div>
+                            
+
+                            <!-- Caixa de Atendimentos -->
+                            <div class="caixa-atendimentos">
+                                <h3>Atendimentos Realizados</h3>
+                                
+                                {% if atendimentos and atendimentos|length > 0 %}
+                                    <table id="tabela-atendimentos">
+                                        <thead>
+                                            <tr>
+                                                <th>CPF/CNPJ</th>
+                                                <th>Nome do Cliente</th>
+                                                <th>Data</th>
+                                                <th>Observação</th>                                                    
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            {% for atendimento in atendimentos %}
+                                                <tr>
+                                                    <td>{{ atendimento.cpf_cnpj_cliente }}</td>
+                                                    <td>{{ atendimento.nome_cliente }}</td>                                               
+                                                    <td>{{ atendimento.data_atendimento }}</td>
+                                                    <td>{{ atendimento.observacao }}</td>                                                                                  
+                                                </tr>
+                                            {% endfor %}
+                                        </tbody>
+                                    </table>
+                                {% else %}
+                                    <p>Nenhum atendimento encontrado.</p>
+                                {% endif %}
+                            <button class="add-button" onclick="toggleObservationForm()">+</button>
+                            </div>
+
+                            
+
+                            <div id="observationForm" class="hidden">
+                                <form id="formObservation" method="POST" action="/add_observation">
+                                    <label for="cliente">Selecionar Cliente:</label>
+                                    <select id="cliente" name="cliente" required>
+                                        {% for cliente in clientes %}
+                                            <option value="{{ cliente[0] }}|{{ cliente[1] }}">{{ cliente[1] }}</option>
+                                        {% endfor %}
+                                    </select>
+
+                                    <label for="observation">Observação:</label>
+                                    <textarea id="observation" name="observation" required></textarea>
+
+                                    <label for="date">Data:</label>
+                                    <input type="date" id="date" name="date" required>
+
+                                    <button type="submit">Registrar</button>
+                                </form>
+                                <button type="button" onclick="toggleObservationForm()">Fechar</button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Exibe as Notas do Cliente -->
+                    <h4>Notas em Aberto</h4>
+                    <div class="notas-container">
+                        <table class="contas_a_receber">
+                            <thead>
+                                <tr>
+                                    <th>Empresa</th>
+                                    <th>Nome</th>
+                                    <th>CPF</th>
+                                    <th>Número NFe</th>
+                                    <th>Data da Venda</th>
+                                    <th>Data do Vencimento</th>
+                                    <th>Valor</th>
+                                    <th>À Receber</th>  
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {% set exibidas = [] %}
+                                {% for nota in cliente_detalhes["notas"] %}
+                                    {% if nota.nota not in exibidas %}
+                                        {% do exibidas.append(nota.nota) %}
+                                        <tr>
+                                            <td>{{ nota.empresa }}</td>
+                                            <td>{{ cliente_detalhes['nome'] }}</td>
+                                            <td>{{ cliente_detalhes['cpf'] }}</td>
+                                            <td>{{ nota.nota }}</td>
+                                            <td>{{ nota.data_venda }}</td>
+                                            <td>{{ nota.data_vencimento }}</td>
+                                            <td>R$ {{ nota.valor_original }}</td>
+                                            <td>R$ {{ nota.saldo_devedor }}</td>
+                                        </tr>
+                                    {% endif %}
+                                {% endfor %}
+
+                                <!-- Exibe as Notas dos Clientes Relacionados -->
+                                {% for cliente_relacionado in clientes_relacionados_detalhes %}
+                                    {% for nota in cliente_relacionado["notas"] %}
+                                        <tr>
+                                            <td>{{ nota.empresa }}</td>
+                                            <td>{{ cliente_relacionado['nome'] }}</td>
+                                            <td>{{ cliente_relacionado['cpf'] }}</td>
+                                            <td>{{ nota.nota }}</td>
+                                            <td>{{ nota.data_venda }}</td>
+                                            <td>{{ nota.data_vencimento }}</td>
+                                            <td>R$ {{ nota.valor_original }}</td>
+                                            <td>R$ {{ nota.saldo_devedor }}</td>
+                                        </tr>
+                                    {% endfor %}
+                                {% endfor %}
+                            </tbody>
+                        </table>
+                    </div>
+
+                    <!-- Exibe o total a receber -->
+                    {% if cliente_detalhes['notas'] %}
+                        <div class="total-a-receber">
+                            <h5>Total a Receber: R$ {{ cliente_detalhes['total_a_receber'] }}</h5>
+                        </div>
+                    {% endif %}
+                </div>
+            {% endif %}
+             
+                <!-- Mensagem -->
+                {% with messages = get_flashed_messages() %}
+                    {% if messages %}
+                        <ul>
+                            {% for message in messages %}
+                                <li>{{ message }}</li>
+                            {% endfor %}
+                        </ul>
+                    {% endif %}
+                {% endwith %}
+            </div>    
+        </div>
+    </div>
+    <script>
+        // Função para alternar a exibição do modal
+        function toggleObservationForm() {
+            const form = document.getElementById('observationForm');
+            form.classList.toggle('hidden');
+        }
+        async function carregarAtendimentos() {
+            try {
+                const response = await fetch('/get_atendimentos', { method: 'GET' });
+                if (response.ok) {
+                    const data = await response.json();
+                    const tabelaAtendimentos = document.getElementById('tabela-atendimentos').getElementsByTagName('tbody')[0];
+                    tabelaAtendimentos.innerHTML = ''; // Limpar a tabela antes de preencher novamente
+                    
+                    data.atendimentos.forEach(atendimento => {
+                        const novaLinha = document.createElement('tr');
+                        novaLinha.innerHTML = `
+                            <td>${atendimento.cpf_cnpj_cliente}</td>
+                            <td>${atendimento.nome_cliente}</td>
+                            <td>${atendimento.data_atendimento}</td>
+                            <td>${atendimento.observacao}</td>
+                        `;
+                        tabelaAtendimentos.appendChild(novaLinha);
+                    });
+                } else {
+                    const error = await response.json();
+                    console.error('Erro ao carregar atendimentos:', error.error || 'Erro desconhecido');
+                }
+            } catch (error) {
+                console.error('Erro inesperado ao carregar atendimentos:', error);
+            }
+        }
+
+
+    
+        // Evento de envio do formulário
+        document.getElementById('formObservation').addEventListener('submit', async function (e) {
+            e.preventDefault(); // Previne envio padrão do formulário
+    
+            const formData = new FormData(this);
+    
+            try {
+                const response = await fetch('/add_observation', {
+                    method: 'POST',
+                    body: formData,
+                });
+    
+                if (response.ok) {
+                    alert('Atendimento registrado com sucesso!');
+                    carregarAtendimentos(); // Atualiza a lista de atendimentos
+                } else {
+                    const error = await response.json();
+                    alert(`Erro: ${error.error || 'Erro desconhecido'}`);
+                }
+    
+                // Fecha apenas o modal sem redirecionar
+                toggleObservationForm();
+            } catch (error) {
+                console.error('Erro inesperado:', error);
+                alert('Erro ao processar a solicitação.');
+            }
+        });
+    
+        // Carrega os atendimentos ao inicializar a página
+        document.addEventListener('DOMContentLoaded', function() {
+            console.log('DOM totalmente carregado, iniciando carregamento dos atendimentos...');
+            carregarAtendimentos();
+        });
+    </script>       
+</body>
+</html>

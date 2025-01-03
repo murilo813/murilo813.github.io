@@ -1,0 +1,65 @@
+@charset "UTF-8";
+
+
+body {
+  font-family: Arial, sans-serif;
+  background-color: #333333;
+}
+
+.container {
+  display: flex;
+  justify-content: center; /* Centraliza horizontalmente */
+  align-items: center; /* Centraliza verticalmente */
+  height: 100vh; /* Faz o container ocupar 100% da altura da tela */
+}
+
+.box {
+  background-color: white;
+  padding: 40px; /* Espaçamento interno para o conteúdo */
+  border-radius: 10px; /* Bordas arredondadas para o retângulo */
+  box-shadow: 0 0 15px rgba(0, 0, 0, 0.1); /* Adiciona uma sombra */
+  text-align: center;
+  width: 350px; /* Define uma largura fixa */
+}
+
+h1 {
+  color: #117011; /* Cor do texto */
+  text-align: center; /* Alinhamento central do texto */
+  font-weight: 900; /* Espessura mais forte */
+  font-size: 50px; /* Tamanho da fonte */
+  -webkit-text-stroke: 3px black; /* Adiciona borda preta com 1px de espessura */
+  text-shadow: none; /* Remove sombras para manter o foco na borda */
+
+}
+
+h2 {
+  color: #333;
+  text-align: center;
+  text-shadow: #333;
+}
+
+form {
+  display: flex;
+  flex-direction: column; /* Coloca os elementos do formulário em uma coluna, um abaixo do outro */
+  width: 300px; /* Define uma largura fixa para o formulário */
+  margin: 0 auto; /* Centraliza o formulário horizontalmente */
+}
+
+input, button {
+  margin-bottom: 15px; /* Espaçamento entre os campos */
+  padding: 10px; /* Adiciona preenchimento interno para os campos */
+  border-radius: 5px; /* Bordas arredondadas */
+  border: 1px solid #ccc; /* Borda ao redor dos campos */
+  font-size: 16px; /* Tamanho da fonte dos campos */
+}
+
+button {
+  background-color: #5cb85c;
+  color: white;
+  border: none;
+  cursor: pointer;
+}
+
+button:hover {
+  background-color: #4cae4c;
+}
